@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o amor da minha vida</title>
+    <style>
+        /* Importando Poppins para o site e Montserrat + Playfair para opções especiais */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Montserrat:wght@700;800&family=Playfair+Display:ital,wght@1,700&display=swap');
+        
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --card-black: #111111;
+            --accent-red: #ff0040;
+            --deep-red: #cc0033;
+            --dark-red: #990026;
+            --neon-red: #ff1744;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --white: #ffffff;
+            --glass-bg: rgba(17, 17, 17, 0.8);
+            --glass-border: rgba(255, 0, 64, 0.3);
+            
+            --timer-main-red: #ff0040;
+            --timer-neon-red: #ff1744;
+            --timer-dark-red: rgba(255, 0, 64, 0.15);
+            
+            --girlfriend-name: "Neném";
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 50%, #2a0a0a 100%) no-repeat fixed;
+            background-color: #0a0a0a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, var(--accent-red), transparent);
+            border-radius: 50%;
+            animation: float-particle 8s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Ondas de fundo */
+        .wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 64, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(204, 0, 51, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(153, 0, 38, 0.1) 0%, transparent 50%);
+            z-index: 2;
+            transform: scale(1.1);
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            animation: slideDown 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .header h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent-red), var(--gold), var(--neon-red), var(--silver));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s ease infinite, text-glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes text-glow {
+            0% { filter: drop-shadow(0 0 10px var(--accent-red)); }
+            100% { filter: drop-shadow(0 0 25px var(--accent-red)) drop-shadow(0 0 35px var(--neon-red)); }
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            color: var(--silver);
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: pulse-text 3s ease-in-out infinite;
+        }
+
+        .girlfriend-name::before {
+            content: var(--girlfriend-name);
+        }
+
+        /* CONTADOR */
+        .timer-container {
+            background: linear-gradient(135deg, rgba(20, 5, 8, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%);
+            border: 2px solid rgba(255, 0, 64, 0.45);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 64, 0.25);
+            border-radius: 22px;
+            padding: 25px 20px;
+            text-align: center;
+            margin: 20px auto 40px auto;
+            max-width: 650px;
+            animation: slideDown 1.2s ease-out;
+        }
+
+        .timer-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--timer-main-red), var(--timer-neon-red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 0, 64, 0.35);
+            border-radius: 14px;
+            padding: 12px 5px;
+            width: 75px;
+            min-width: 65px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--timer-dark-red), transparent);
+        }
+
+        .timer-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            display: block;
+            color: #ff0040;
+            text-shadow: 0 0 12px rgba(255, 0, 64, 0.85);
+        }
+
+        .timer-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #ff4d6d;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            font-weight: 600;
+            display: block;
+        }
+
+        /* Card principal original */
+        .love-card {
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(17, 17, 17, 0.95) 100%);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin: 40px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 0, 64, 0.3), 0 0 40px rgba(255, 0, 64, 0.15);
+            border: 1px solid rgba(255, 0, 64, 0.4);
+            text-align: center;
+            position: relative;
+        }
+
+        .love-card h2 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--white), var(--silver), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+        }
+
+        .love-message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: var(--silver);
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        /* Botão premium original */
+        .surprise-btn {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(45deg, var(--accent-red), #ff007f, var(--deep-red), #9d00ff);
+            background-size: 300% 300%;
+            color: var(--white);
+            border: none;
+            padding: 22px 45px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            text-transform: lowercase;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 40px 0;
+            box-shadow: 0 12px 30px rgba(255, 0, 100, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: premium-gradient-animation 4s ease infinite, btn-pulse 3s ease-in-out infinite;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 20px 45px rgba(255, 0, 90, 0.6), 0 0 25px var(--gold);
+            border-color: var(--gold);
+        }
+
+        /* Mensagem especial */
+        .special-message {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 40px 20px;
+            margin: 30px auto; max-width: 600px; width: calc(100% - 20px);
+            border: 2px solid var(--glass-border);
+            opacity: 1;
+            transform: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 0, 64, 0.2);
+        }
+
+        .special-message.show {
+            display: block !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 0, 64, 0.2);
+        }
+
+        .special-message h3 {
+            background: linear-gradient(45deg, var(--accent-red), var(--gold), var(--neon-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .special-message p {
+            color: var(--silver);
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        /* ==========================================================================
+           MÁQUINA INTERATIVA DE MOTIVOS (ESTILO GASHAPON PREMIUM)
+           ========================================================================== */
+        .motivos-container {
+            text-align: center;
+            margin: 60px auto;
+            max-width: 650px;
+            padding: 0 15px;
+            position: relative;
+        }
+
+        .maquina-titulo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent-red), var(--gold), var(--neon-red));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 64, 0.3));
+        }
+
+        .gashapon-machine {
+            width: 250px;
+            height: 410px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            perspective: 1000px;
+        }
+
+        .machine-globe {
+            width: 230px;
+            height: 230px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25) 0%, rgba(255, 0, 64, 0.08) 40%, rgba(0, 0, 0, 0.65) 100%);
+            border: 4px solid rgba(255, 0, 64, 0.45);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 20px 30px rgba(255, 255, 255, 0.15), inset -10px -10px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 0, 64, 0.2);
+            overflow: hidden;
+            z-index: 5;
+            backdrop-filter: blur(1px);
+        }
+
+        .machine-globe::after {
+            content: '';
+            position: absolute;
+            top: 15px; left: 45px; width: 50px; height: 25px;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .machine-cap {
+            width: 125px; height: 26px;
+            background: linear-gradient(90deg, #66001a, var(--accent-red), #ff4d6d, var(--dark-red));
+            border-radius: 12px 12px 4px 4px;
+            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            z-index: 6;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .papers-container {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+        }
+
+        .floating-paper {
+            position: absolute; width: 22px; height: 13px; border-radius: 3px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .machine-base {
+            width: 200px; height: 185px;
+            background: linear-gradient(135deg, #a6002c 0%, #66001a 50%, #400010 100%);
+            border: 2px solid rgba(255, 0, 64, 0.5); border-radius: 0 0 45px 45px;
+            position: relative; margin-top: -25px; z-index: 4;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 8px 15px rgba(255, 255, 255, 0.2), inset 0 -10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .machine-crank-wrap {
+            position: absolute; top: 35px; left: 50%; transform: translateX(-50%);
+            width: 75px; height: 75px; background: #111111; border-radius: 50%;
+            border: 3px solid var(--gold); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.6), inset 0 3px 6px rgba(0,0,0,0.8), 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .machine-crank {
+            width: 50px; height: 15px;
+            background: linear-gradient(to bottom, #ffffff, #cccccc, #888888); border-radius: 12px;
+            position: relative; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+        }
+
+        .machine-crank::after {
+            content: ''; position: absolute; width: 18px; height: 18px;
+            background: radial-gradient(circle, var(--gold), #b39200); border-radius: 50%;
+            right: -5px; top: -2px; box-shadow: 0 2px 5px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.4);
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .machine-outlet {
+            width: 70px; height: 50px; background: linear-gradient(180deg, #050505 0%, #151515 100%);
+            border: 2px solid rgba(255, 0, 64, 0.4); border-radius: 12px 12px 6px 6px;
+            position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+            box-shadow: inset 0 6px 12px rgba(0,0,0,1); overflow: hidden;
+        }
+
+        .dispensed-paper {
+            width: 26px; height: 16px; background: #ffffff; border-radius: 2px;
+            position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
+            opacity: 0; box-shadow: 0 0 12px rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        @keyframes machine-heavy-shake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            15% { transform: translate(-5px, 4px) rotate(-1.5deg); }
+            30% { transform: translate(5px, -3px) rotate(2deg); }
+            45% { transform: translate(-4px, -4px) rotate(-2deg); }
+            60% { transform: translate(4px, 3px) rotate(1.5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .shake-machine { animation: machine-heavy-shake 0.55s ease-in-out infinite; }
+
+        @keyframes paper-drop-delivery {
+            0% { top: -25px; opacity: 0; transform: translateX(-50%) rotate(0deg); }
+            40% { top: 15px; opacity: 1; transform: translateX(-50%) rotate(60deg); }
+            100% { top: 26px; opacity: 1; transform: translateX(-50%) scale(1.15) rotate(18deg); }
+        }
+
+        .dispense-active { animation: paper-drop-delivery 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.45s; }
+
+        /* Frase embaixo da máquina em Branco Puro com Destaque */
+        .machine-tip {
+            font-size: 0.95rem !important;
+            color: #ffffff !important;
+            opacity: 1 !important;
+            font-style: italic !important;
+            margin-top: 20px !important;
+            margin-bottom: 10px !important;
+            display: block !important;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 0, 64, 0.3) !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        /* EMBUTIDO ABAIXO DA MÁQUINA (ALTA LEGIBILIDADE) */
+        .inline-paper-card {
+            -webkit-tap-highlight-color: transparent !important;
+            background: var(--card-black) !important;
+            border: 2px solid var(--accent-red) !important;
+            border-radius: 16px !important;
+            padding: 30px 20px !important;
+            margin: 25px auto 0 auto !important;
+            max-width: 420px !important;
+            box-shadow: 0 10px 30px rgba(255, 0, 64, 0.25), inset 0 0 15px rgba(0,0,0,0.5) !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            animation: slideDownIn 0.4s ease-out forwards;
+        }
+
+        @keyframes slideDownIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .inline-paper-card h5 {
+            font-size: 1.1rem !important;
+            color: var(--gold) !important;
+            margin: 0 0 15px 0 !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1.5px !important;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15) !important;
+            padding-bottom: 10px !important;
+        }
+
+        .inline-paper-text {
+            font-size: 1.25rem !important;
+            line-height: 1.7 !important;
+            font-weight: 600 !important;
+            margin: 0 0 25px 0 !important;
+            color: var(--white) !important;
+            font-style: italic !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
+            padding: 0 5px !important;
+        }
+
+        .close-letter-btn {
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            background: linear-gradient(45deg, var(--accent-red), var(--deep-red)) !important;
+            color: var(--white) !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            padding: 12px 25px !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+            border-radius: 50px !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            width: 100% !important;
+            max-width: 240px !important;
+            display: inline-block !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 4px 12px rgba(255, 0, 64, 0.3) !important;
+        }
+
+        .close-letter-btn:hover {
+            background: var(--neon-red) !important;
+            transform: scale(1.03);
+            box-shadow: 0 6px 18px rgba(255, 0, 64, 0.5) !important;
+        }
+
+        /* TÍTULO DA GALERIA HARMONIZADO */
+        .gallery-title {
+            text-align: center;
+            font-size: 2.2rem !important;
+            font-weight: 700 !important;
+            margin: 60px 0 35px 0 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--accent-red), #ff007f, #9d00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.6));
+            animation: title-pulse 2s ease-in-out infinite alternate;
+            letter-spacing: -0.5px !important;
+            text-transform: lowercase !important;
+        }
+
+        /* Corações Assimétricos (Estilo Romântico e Orgânico) */
+        .gallery-title .title-heart:first-of-type {
+            display: inline-block !important;
+            font-size: 2.2rem !important;
+            -webkit-text-fill-color: initial;
+            filter: drop-shadow(0 0 10px #ff0040);
+            transform: rotate(-14deg) scale(1.1) translateY(2px) !important;
+            animation: heartWobbleLeft 2.5s ease-in-out infinite alternate !important;
+        }
+        
+        .gallery-title .title-heart:last-of-type {
+            display: inline-block !important;
+            font-size: 2.2rem !important;
+            -webkit-text-fill-color: initial;
+            filter: drop-shadow(0 0 10px #ff0040);
+            transform: rotate(18deg) scale(0.95) translateY(-2px) !important;
+            animation: heartWobbleRight 2.8s ease-in-out infinite alternate !important;
+        }
+
+        @keyframes heartWobbleLeft {
+            0% { transform: rotate(-14deg) scale(1.1); }
+            100% { transform: rotate(-6deg) scale(1.2); }
+        }
+        @keyframes heartWobbleRight {
+            0% { transform: rotate(18deg) scale(0.95); }
+            100% { transform: rotate(26deg) scale(1.05); }
+        }
+
+        /* Galeria de fotos com tamanho fofo */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame {
+            width: 100%; max-width: 240px; margin: 0 auto;
+            max-width: 260px;
+            margin: 0 auto;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--card-black) 0%, var(--secondary-black) 50%, var(--card-black) 100%);
+            border-radius: 16px;
+            padding: 6px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 64, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease-out, border-color 0.3s;
+            border: 1px solid rgba(255, 0, 64, 0.4);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+            filter: brightness(0.95) contrast(1.15);
+        }
+
+        .photo-frame:hover {
+            border-color: rgba(255, 0, 64, 0.8);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 0, 64, 0.4);
+        }
+
+        .photo-caption {
+            margin-top: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--white);
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 0 15px var(--accent-red);
+            letter-spacing: 0.5px;
+        }
+
+        /* Caixa de Áudio Compacta e Charmosa */
+        .audio-voice-container {
+            margin: 40px auto;
+            max-width: 360px !important;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(28, 10, 15, 0.9) 100%);
+            border: 2px solid rgba(255, 0, 64, 0.4);
+            border-radius: 20px !important;
+            padding: 22px 18px !important;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 0, 64, 0.2) !important;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .audio-photo-wrapper {
+            width: 90px !important;
+            height: 90px !important;
+            margin: 0 auto 10px auto !important;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--accent-red);
+            box-shadow: 0 0 15px rgba(255, 0, 64, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem !important;
+            background: #151515;
+        }
+
+        .audio-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .audio-title {
+            font-size: 1.05rem !important;
+            font-weight: 400;
+            color: var(--white) !important;
+            margin: 10px 0 18px 0 !important;
+            letter-spacing: 0.5px;
+            font-style: italic;
+            line-height: 1.6;
+            display: block;
+        }
+
+        .custom-audio-player {
+            display: flex;
+            align-items: center;
+            gap: 12px !important;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 18px !important;
+            border-radius: 30px !important;
+            margin-top: 10px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .audio-play-btn {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, var(--accent-red), var(--deep-red));
+            border: none;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .audio-progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-red), var(--gold));
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 100px 20px;
+            color: var(--silver);
+            font-size: 1.3rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-red), var(--gold), var(--accent-red));
+        }
+
+        .heart-beat {
+            color: var(--accent-red);
+            animation: mega-heartbeat 1s ease-in-out infinite;
+            font-size: 2rem;
+            display: inline-block;
+        }
+
+        @keyframes mega-heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3) rotate(5deg); }
+            50% { transform: scale(1.1) rotate(-5deg); }
+        }
+
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-black), var(--secondary-black));
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeOut 1.5s ease-in-out 2s forwards;
+        }
+
+        .loading-heart {
+            font-size: 4rem;
+            animation: loading-pulse 1s ease-in-out infinite;
+            color: var(--accent-red);
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; pointer-events: none; }
+        }
+
+        /* Responsividade e Respiro contra Bordas no Mobile */
+        @media (max-width: 580px) {
+            .header h1 { font-size: 2.5rem; }
+            .header p { font-size: 1.1rem; }
+            
+            .love-card { 
+                padding: 30px 20px; 
+                margin: 30px 10px;
+                width: calc(100% - 20px);
+            }
+            .love-card h2 { font-size: 2rem; }
+            .love-message { font-size: 1.1rem; }
+            .surprise-btn { padding: 16px 32px; font-size: 1.15rem; }
+            
+            .gallery-title { font-size: 1.5rem !important; margin: 50px 0 25px 0; padding: 0 10px; gap: 8px !important; }
+            .gallery-title .title-heart { font-size: 1.6rem !important; }
+            
+            .photo-gallery { grid-template-columns: 1fr; gap: 30px; padding: 0 10px; }
+            .photo-caption { font-size: 1.2rem; margin-top: 10px; }
+            .special-message { padding: 30px 20px; margin: 30px auto; max-width: 600px; width: calc(100% - 20px); }
+            .special-message h3 { font-size: 1.8rem; }
+            .special-message p { font-size: 1.1rem; }
+
+            .audio-voice-container {
+                margin: 40px 10px !important;
+                padding: 22px 15px !important;
+                width: calc(100% - 20px) !important;
+                box-sizing: border-box !important;
+            }
+            .audio-title {
+                font-size: 1rem !important;
+                padding: 0 5px;
+            }
+            .custom-audio-player {
+                padding: 10px 14px !important;
+                gap: 10px !important;
+            }
+
+            .timer-container { padding: 18px 10px; margin-bottom: 25px; margin-left: 10px; margin-right: 10px; }
+            .timer-title { font-size: 1.35rem; margin-bottom: 15px; }
+            .timer-display { gap: 6px; }
+            .timer-box { width: 23%; min-width: auto; padding: 10px 2px; border-radius: 10px; }
+            .timer-number { font-size: 1.6rem; font-weight: 800; }
+            .timer-label { font-size: 0.55rem; letter-spacing: 0.5px; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: slideUp 0.6s ease-out forwards; }
+    
+        /* Estilos para animações de surpresa e explosões de corações */
+        .heart-explosion {
+            position: fixed;
+            z-index: 99999;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: blowUpHeart 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes blowUpHeart {
+            0% { transform: scale(0) translate(0, 0) rotate(0deg); opacity: 1; }
+            50% { opacity: 0.9; }
+            100% { transform: scale(1.4) translate(var(--tx, 20px), var(--ty, -120px)) rotate(var(--rot, 45deg)); opacity: 0; }
+        }
+        @keyframes te-amo-main {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+            85% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+        }
+        @keyframes te-amo-float {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { opacity: 1; transform: translateY(-10px) scale(1.05); }
+            100% { transform: translateY(-70px) scale(0.9); opacity: 0; }
+        }
+
+    
+        @keyframes slideUpInMessage {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="loading-heart">❤️</div>
+    </div>
+
+    <div class="particles"></div>
+    <div class="wave-bg"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1>Para Minha <span class="girlfriend-name"></span></h1>
+            <p>Uma declaração de amor criada especialmente para você ❤️</p>
+        </header>
+
+        <div class="timer-container">
+            <div class="timer-title">NOSSO TEMPO JUNTOS.</div>
+            <div class="timer-display">
+                <div class="timer-box">
+                    <span class="timer-number num-days" id="count-days">00</span>
+                    <span class="timer-label">Dias</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number num-hours" id="count-hours">00</span>
+                    <span class="timer-label">Horas</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number num-minutes" id="count-minutes">00</span>
+                    <span class="timer-label">Min</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number num-seconds" id="count-seconds">00</span>
+                    <span class="timer-label">Seg</span>
+                </div>
+            </div>
+        </div>
+
+        <main class="love-card">
+            <h2>Minha futura esposa 💕</h2>
+            <div class="love-message">
+                <p><span class="girlfriend-name"></span>, você é o amor da minha vida, é o meu primeiro pensamento ao acordar e o último antes de dormir. Desde que você chegou na minha vida, cada dia se tornou mais colorido, mais doce e muito mais alegre.</p>
+                <br>
+                <p>Você é a minha felicidade, meu porto seguro, minha inspiração diária. Com você, descobri que o amor verdadeiro não é apenas um sentimento: é um lar, é paz, é a certeza de que encontrei uma pessoa para a vida toda! ❤️</p>
+            </div>
+
+            <button class="surprise-btn" onclick="triggerVisualSurprise()">
+                ✨ tenho uma surpresa para você ✨ 
+            </button>
+
+            <div class="special-message" id="specialMessage">
+                <h3>💖 Do Fundo Do Meu Coração 💖</h3>
+                <p><span class="girlfriend-name"></span>, você é a resposta mais linda das minhas orações. Agradeço a Deus todos os dias por ter te colocado na minha vida. Cada sorriso seu ilumina meu mundo, cada "eu te amo" seu me faz sentir em casa.</p>
+                <br>
+                <p>Obrigado por sempre me apoiar em tudo. Você é minha melhor amiga, o meu grande amor, é a vida me amando de volta. Eu quero que você saiba hoje e sempre: você é tudo que eu sempre sonhei e muito mais! 💝</p>
+            </div>
+
+            <!-- MÁQUINA DE MOTIVOS TOTALMENTE INTEGRADA ABAIXO DOS TEXTOS -->
+            <div class="motivos-container">
+                <h3 class="maquina-titulo" id="maquinaTitulo">🎰 1 motivo para te amar hoje 🎰</h3>
+                
+                <div class="gashapon-machine" id="loveMachine" onclick="dispenseLoveReason()">
+                    <div class="machine-cap"></div>
+                    <div class="machine-globe" id="machineGlobe">
+                        <div class="papers-container" id="papersContainer">
+                            <!-- Gerado via JS -->
+                        </div>
+                    </div>
+                    <div class="machine-base">
+                        <div class="machine-crank-wrap">
+                            <div class="machine-crank" id="machineCrank"></div>
+                        </div>
+                        <div class="machine-outlet">
+                            <div class="dispensed-paper" id="dispensedPaper"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="machine-tip">clique na manivela para tirar um bilhete premiado! 📜</p>
+
+                <!-- Bilhete que abre perfeitamente visível e in-line -->
+                <div class="inline-paper-card" id="paperModal" style="display: none;">
+                    <h5>📜 Bilhete aleatório</h5>
+                    <div class="inline-paper-text" id="modalReasonText">
+                        Carregando o seu motivo...
+                    </div>
+                    <button class="close-letter-btn" onclick="closePaperModal()">Guardar no Coração ❤️</button>
+                </div>
+            </div>
+        </main>
+
+        <h2 class="gallery-title">
+            <span class="title-heart">💛</span> 4 coisas que eu mais amo em você <span class="title-heart">💛</span>
+        </h2>
+
+        <section class="photo-gallery">
+            <div class="gallery-item">
+                <div class="photo-frame">
+                    <img src="img/1.webp" alt="Seus olhos" onerror="this.style.display='none'; this.parentNode.innerHTML='👀<br><small>Foto 1</small>';">
+                </div>
+                <div class="photo-caption">Seus olhos</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="photo-frame">
+                    <img src="img/2.webp" alt="Seu sorriso" onerror="this.style.display='none'; this.parentNode.innerHTML='🫦<br><small>Foto 2</small>';">
+                </div>
+                <div class="photo-caption">Seu sorriso</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="photo-frame">
+                    <img src="img/3.webp" alt="Seus cabelos" onerror="this.style.display='none'; this.parentNode.innerHTML='🪮<br><small>Foto 3</small>';">
+                </div>
+                <div class="photo-caption">Seus cabelos</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="photo-frame">
+                    <img src="img/4.webp" alt="Você inteirinha" onerror="this.style.display='none'; this.parentNode.innerHTML='👸<br><small>Foto 4</small>';">
+                </div>
+                <div class="photo-caption">Você inteirinha</div>
+            </div>
+        </section>
+
+        <div class="audio-voice-container">
+            <div class="audio-photo-wrapper">
+                <img src="img/audio-capa.webp" alt="Foto criança" onerror="this.style.display='none'; this.parentNode.innerHTML='🎙️';">
+            </div>
+            <h4 class="audio-title">Se você chegou até aqui, eu queria que você soubesse disso.</h4>
+            
+            <div class="custom-audio-player">
+                <audio id="romanticAudio" preload="auto">
+                    <source src="audio/meu-audio.m4a" type="audio/mp4">
+                    <source src="audio/meu-audio.ogg" type="audio/ogg">
+                    <source src="audio/meu-audio.opus" type="audio/ogg">
+                </audio>
+                <button class="audio-play-btn" id="audioPlayBtn" onclick="toggleRomanticAudio()">▶ Ouvir</button>
+                <div class="audio-progress-bar">
+                    <div class="audio-progress-fill" id="audioProgressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Criado com todo <span class="heart-beat">❤️</span> do universo</p>
+            <p>Para a <span class="girlfriend-name"></span> mais linda do mundo! 💫</p>
+            <p>Eu te vivo! 💑</p>
+        </footer>
+    </div>
+
+    <script>
+        // Os 56 motivos únicos enviados filtrados perfeitamente
+        const loveReasons = [
+            "Hoje eu te amo porque os seus cachos são a coisa mais linda desse mundo.", "Hoje eu te amo porque o brilho do seu olhar castanho me fascina.", "Hoje eu te amo porque o seu sorriso ilumina minha vida.", "Hoje eu te amo porque fico bobo com a perfeição dos seus traços.", "Hoje eu te amo porque você fica maravilhosa com o cabelo finalizado.", 
+            "Hoje eu te amo porque até os seus mínimos detalhes, como as unhas, eu acho lindos.", "Hoje eu te amo porque você é, sem dúvidas, a menina mais linda do universo.", "Hoje eu te amo porque a sua risada é o som mais gostoso de se ouvir. ", "Hoje eu te amo porque o barulho da sua respiração me acalma.", "Hoje eu te amo porque a distância só me mostra o tamanho do meu amor por você.",
+            
+            "Hoje eu te amo porque ver uma notificação sua na tela do meu celular é a melhor parte do meu dia.", "Hoje eu te amo porque amo o som da sua voz ao acordar", "Hoje eu te amo porque as nossas chamadas me salvam de qualquer dia ruim.", "Hoje eu te amo porque adoro quando você me manda áudios longos contando qualquer coisinha.", "Hoje eu te amo porque mesmo de longe você consegue me fazer o namorado mais feliz do mundo.", 
+            "Hoje eu te amo porque dormir sabendo que você está pensando em mim me dá paz.", "Hoje eu te amo porque o seu senso de humor combina perfeitamente com o meu.", "Hoje eu te amo porque a sua determinação me inspira a ser alguém melhor.", "Hoje eu te amo porque o seu lado romântico me deixa completamente bobo.", "Hoje eu te amo porque a sua inteligência me encanta cada vez mais.", 
+            "Hoje eu te amo porque você percebe quando eu não estou bem mesmo sem eu dizer nada.", "Hoje eu te amo porque você tem o superpoder de me fazer sorrir nas horas mais difíceis.", "Hoje eu te amo porque o seu jeitinho tímido de vez em quando é a coisa mais fofa.", "Hoje eu te amo porque sinto um orgulho imenso de cada conquista sua.", "Hoje eu te amo porque o seu coração é enorme e cheio de bondade.", 
+            "Hoje eu te amo porque além de minha namorada, você é a minha melhor amiga.", "Hoje eu te amo porque o meu coração ainda acelera quando vejo sua foto.", "Hoje eu te amo porque você me traz uma segurança que eu nunca tive antes.", "Hoje eu te amo porque você é o meu porto seguro em meio a qualquer caos.", "Hoje eu te amo porque você me apoia em cada um dos meus sonhos.", 
+            "Hoje eu te amo porque a minha vida ficou muito mais colorida depois de você.", "Hoje eu te amo porque sinto um orgulho gigante de dizer que você é minha namorada.", "Hoje eu te amo porque você preenche todos os meus espaços vazios.", "Hoje eu te amo porque a saudade que sinto de você é a prova mais bonita do meu amor.", "Hoje eu te amo porque as suas palavras têm o poder de me acalmar instantaneamente.", 
+            "Hoje eu te amo porque você valida os meus sentimentos e me ouve de verdade.", "Hoje eu te amo porque o seu abraço (mesmo que ainda na imaginação) é o lugar onde quero morar.", "Hoje eu te amo porque imagino a gente juntos dividindo a mesma casa no futuro.", "Hoje eu te amo porque sei que estes dois anos são só o começo da nossa eternidade.", "Hoje eu te amo porque a gente nunca desiste um do outro, não importa a dificuldade.", 
+            "Hoje eu te amo porque o nosso carinho é recíproco e verdadeiro.", "Hoje eu te amo porque você faz eu me sentir o cara mais sortudo do mundo.", "Hoje eu te amo por tudo o que já superamos e ainda vamos superar juntos.", "Hoje eu te amo simplesmente por você ser exatamente quem você é.", "Hoje eu te amo porque você é a razão de toda a minha felicidade.", 
+            "Hoje eu te amo porque o seu amor me transforma em alguém melhor todos os dias.", "Hoje eu te amo porque você traz leveza para os meus dias mais pesados.", "Hoje eu te amo porque adoro o seu jeito de demonstrar que se importa comigo.", "Hoje eu te amo porque a sua confiança em mim me dá forças para continuar.", "Hoje eu te amo porque você é o meu refúgio favorito.", 
+            "Hoje eu te amo porque o nosso amor é a coisa mais bonita que eu já construí.", "Hoje eu te amo porque sei que o nosso primeiro beijo vai parar o tempo.", "Hoje eu te amor porque você é a resposta mais linda das minhas orações."
+        ];
+
+        let lastReasonIndex = -1;
+        let isMachineOperating = false;
+
+        function populateMachineGlobe() {
+            const container = document.getElementById('papersContainer');
+            if(!container) return;
+            container.innerHTML = '';
+            const colors = ['#ff4d6d', '#ff758f', '#ff85a1', '#f72585', '#ffffff', '#ffd700'];
+            for(let i = 0; i < 35; i++) {
+                const paper = document.createElement('div');
+                paper.className = 'floating-paper';
+                paper.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                paper.style.left = (15 + Math.random() * 70) + '%';
+                paper.style.top = (25 + Math.random() * 55) + '%';
+                paper.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(paper);
+            }
+        }
+
+        function dispenseLoveReason() {
+            if (isMachineOperating) return;
+            isMachineOperating = true;
+
+            const machine = document.getElementById('loveMachine');
+            const crank = document.getElementById('machineCrank');
+            const dispensed = document.getElementById('dispensedPaper');
+            const papers = document.querySelectorAll('.floating-paper');
+
+            crank.style.transform = 'rotate(360deg)';
+            machine.classList.add('shake-machine');
+
+            papers.forEach(p => {
+                p.style.transform = `rotate(${Math.random() * 720}deg) translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
+            });
+
+            dispensed.classList.add('dispense-active');
+
+            setTimeout(() => {
+                let randomIndex = Math.floor(Math.random() * loveReasons.length);
+                while (randomIndex === lastReasonIndex) {
+                    randomIndex = Math.floor(Math.random() * loveReasons.length);
+                }
+                lastReasonIndex = randomIndex;
+
+                document.getElementById('modalReasonText').innerHTML = "“" + loveReasons[randomIndex] + "”";
+                
+                const pm = document.getElementById('paperModal'); 
+                pm.style.display = 'block'; 
+                pm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                createHeartExplosion();
+            }, 1100);
+        }
+
+        function closePaperModal() {
+            document.getElementById('paperModal').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('machineCrank').style.transform = 'rotate(0deg)';
+                document.getElementById('loveMachine').classList.remove('shake-machine');
+                document.getElementById('dispensedPaper').classList.remove('dispense-active');
+                populateMachineGlobe();
+                isMachineOperating = false;
+            }, 400);
+        }
+
+        function updateRelationshipTimer() {
+            const startDate = new Date(2024, 10, 11, 0, 0, 0); 
+            const now = new Date();
+            let diff = now - startDate;
+            if (diff < 0) diff = 0;
+            
+            const msecPerSecond = 1000;
+            const msecPerMinute = 60 * 1000;
+            const msecPerHour = 60 * 60 * 1000;
+            const msecPerDay = 24 * 60 * 60 * 1000;
+            
+            const days = Math.floor(diff / msecPerDay);
+            diff %= msecPerDay;
+            const hours = Math.floor(diff / msecPerHour);
+            diff %= msecPerHour;
+            const minutes = Math.floor(diff / msecPerMinute);
+            diff %= msecPerMinute;
+            const seconds = Math.floor(diff / msecPerSecond);
+            
+            document.getElementById('count-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('count-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('count-minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('count-seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        function toggleRomanticAudio() {
+            const audio = document.getElementById('romanticAudio');
+            const btn = document.getElementById('audioPlayBtn');
+            if (audio.paused) {
+                if (audio.readyState === 0) { audio.load(); }
+                audio.play().catch(err => {
+                    alert("Aviso: Adicione o áudio na pasta 'audio' como 'meu-audio.m4a'!");
+                });
+                btn.innerHTML = '❚❚ Pausar';
+            } else {
+                audio.pause();
+                btn.innerHTML = '▶ Ouvir';
+            }
+        }
+
+        function createParticle() {
+            const container = document.querySelector('.particles');
+            if (!container || container.children.length > 25) return;
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 6 + 4) + 's';
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 8000);
+        }
+        setInterval(createParticle, 400);
+
+        function triggerVisualSurprise() {
+            createHeartExplosion();
+            createTeAmoAnimation();
+        }
+
+        function createTeAmoAnimation() {
+            const teAmoTexts = ['EU TE AMO ❤️', '💖 EU TE VIVO 💖', 'AMO OS SEUS DETALHES!', '❤️ MINHA PRINCESA ❤️', 'TE AMO PARA SEMPRE!'];
+            const mainTeAmo = document.createElement('div');
+            mainTeAmo.innerHTML = 'EU TE AMO 🤍';
+            mainTeAmo.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: bold;
+                background: linear-gradient(45deg, #ff0040, #ffd700, #ff0040);
+                -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+                z-index: 9999; pointer-events: none; animation: te-amo-main 3s ease-out forwards;
+                filter: drop-shadow(0 0 20px rgba(255, 0, 64, 1));
+            `;
+            document.body.appendChild(mainTeAmo);
+            setTimeout(() => mainTeAmo.remove(), 3000);
+
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const teAmo = document.createElement('div');
+                    teAmo.innerHTML = teAmoTexts[Math.floor(Math.random() * teAmoTexts.length)];
+                    teAmo.style.cssText = `
+                        position: fixed; left: ${Math.random() * (window.innerWidth - 150)}px; top: ${Math.random() * (window.innerHeight - 100)}px;
+                        font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: bold; color: #ff0040; z-index: 9998;
+                        pointer-events: none; animation: te-amo-float 2.5s ease-out forwards;
+                        text-shadow: 0 0 15px rgba(255, 0, 64, 0.8);
+                    `;
+                    document.body.appendChild(teAmo);
+                    setTimeout(() => teAmo.remove(), 2500);
+                }, i * 250);
+            }
+        }
+
+        function createHeartExplosion() {
+            const hearts = ['❤️', '💖', '💕', '💗', '💝'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-explosion';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = (window.innerWidth / 2) + 'px';
+                    heart.style.top = (window.innerHeight / 2) + 'px';
+                    heart.style.setProperty('--tx', (Math.random() * 400 - 200) + 'px');
+                    heart.style.setProperty('--ty', (Math.random() * -400 - 50) + 'px');
+                    heart.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 80);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateRelationshipTimer();
+            setInterval(updateRelationshipTimer, 1000);
+            populateMachineGlobe();
+
+            
+
+            const audio = document.getElementById('romanticAudio');
+            const btn = document.getElementById('audioPlayBtn');
+            const fill = document.getElementById('audioProgressFill');
+            
+            if (audio) {
+                audio.addEventListener('timeupdate', () => {
+                    if (audio.duration) {
+                        const percentage = (audio.currentTime / audio.duration) * 100;
+                        fill.style.width = percentage + '%';
+                    }
+                });
+                audio.addEventListener('ended', () => {
+                    btn.innerHTML = '▶ Ouvir';
+                    fill.style.width = '0%';
+                });
+            }
+
+            setTimeout(() => {
+                const overlay = document.querySelector('.loading-overlay');
+                if (overlay) { 
+                    overlay.style.opacity = '0';
+                    overlay.style.transition = 'opacity 0.8s ease';
+                    setTimeout(() => overlay.remove(), 800);
+                }
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
